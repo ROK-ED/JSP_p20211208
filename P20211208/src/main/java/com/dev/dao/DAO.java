@@ -1,11 +1,13 @@
 package com.dev.dao;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+
+import javax.naming.InitialContext;
+import javax.sql.DataSource;
 
 public class DAO {
 
@@ -17,16 +19,19 @@ public class DAO {
 	public void connect() {
 		// 1.JDBC Driver 로딩하기.
 		try {
-			Class.forName("oracle.jdbc.driver.OracleDriver");
-			// 2.DB 서버 접속하기
-			String url = "jdbc:oracle:thin:@localhost:1521:xe";
-			String id = "hr";
-			String password = "hr";
-
-			conn = DriverManager.getConnection(url, id, password);
+//			Class.forName("oracle.jdbc.driver.OracleDriver");
+//			// 2.DB 서버 접속하기
+//			String url = "jdbc:oracle:thin:@localhost:1521:xe";
+//			String id = "hr";
+//			String password = "hr";
+//
+//			conn = DriverManager.getConnection(url, id, password);
+		
+			InitialContext ic = new InitialContext();
+			DataSource ds = (DataSource) ic.lookup("java:comp/env/jdbc/myoracle");
+			conn = ds.getConnection();
 			System.out.println("연결성공");
-		} catch (ClassNotFoundException | SQLException e) {
-			// TODO Auto-generated catch block
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 

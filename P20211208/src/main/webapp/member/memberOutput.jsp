@@ -9,6 +9,14 @@
 <title>memberOutput.jsp</title>
 </head>
 <body>
+	<%
+	String id = (String) session.getAttribute("id");
+	if (id == null) {
+		response.sendRedirect("../login.jsp");
+	} else {
+	%>
+	<%@ include file="../menu.jsp"%>
+<h3><%=session.getAttribute("name")%>님, 환영합니다.</h3>
 	<a href="index.jsp">첫 페이지로</a>
 	<%
 	//Integer.parseInt(""); //강제로 에러내기위해 써봄
@@ -19,6 +27,11 @@
 	<h3>입력한 이름: <%=vo.getName() %></h3>
 	<h3>입력한 비번: <%=vo.getPasswd() %></h3>
 	<h3>입력한 이메일: <%=vo.getMail() %></h3>
+	
+	<%@ include file="../footer.jsp"%>
+	<%
+	}
+	%>
 	
 </body>
 </html>

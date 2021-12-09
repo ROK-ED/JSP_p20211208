@@ -7,6 +7,14 @@
 <title>memberSearch.jsp</title>
 </head>
 <body>
+	<%
+	String id = (String) session.getAttribute("id");
+	if (id == null) {
+		response.sendRedirect("../login.jsp");
+	} else {
+	%>
+	<%@ include file="../menu.jsp"%>
+	<h3><%=session.getAttribute("name")%>님, 환영합니다.</h3>
 	<a href="../index.jsp">첫 페이지로</a>
 	<h3>회원검색</h3>
 	<form action="../memberSearch.do" method='get'>
@@ -14,6 +22,9 @@
 		<input type='hidden' name='job' value='search'> 
 		<input type='submit' value='검색'>
 	</form>
-
+	<%@ include file="../footer.jsp"%>
+	<%
+	}
+	%>
 </body>
 </html>

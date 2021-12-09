@@ -9,6 +9,16 @@
 </head>
 <body>
 	<%
+	String id = (String) session.getAttribute("id");
+	if (id == null) {
+		response.sendRedirect("../login.jsp");
+	} else {
+	%>
+<%@ include file="../menu.jsp"%>
+	<h3><%=session.getAttribute("name")%>님, 환영합니다.</h3>
+
+
+	<%
 	MemberVO vo = (MemberVO) request.getAttribute("member");
 	%>
 	
@@ -19,5 +29,10 @@
 		E-mail: <input type='email' name='mail' value='<%=vo.getMail()%>'><br>
 		<input type='submit' value='수정'>
 	</form>
+	
+	<%@ include file="../footer.jsp"%>
+	<%
+	}
+	%>
 </body>
 </html>

@@ -8,6 +8,15 @@
 <title>memberSearchOutPut.jsp</title>
 </head>
 <body>
+	<%
+	String id = (String) session.getAttribute("id");
+	if (id == null) {
+		response.sendRedirect("../login.jsp");
+	} else {
+	%>
+<%@ include file="../menu.jsp"%>
+<h3><%=session.getAttribute("name")%>님, 환영합니다.</h3>
+	
 	<%! // !안에는 변수나 메소드 선언가능
 		public String concat(String a, String b){
 		return a+", "+b;
@@ -18,6 +27,7 @@
 	MemberVO vo = (MemberVO) request.getAttribute("member");
 	double pi = Math.PI;
 	%>
+	
 	<a href="index.jsp">첫 페이지로</a>
 	<h3>회원 상세 정보</h3>
 	<%
@@ -50,5 +60,11 @@
 	<%
 	}
 	%>
+	<%@ include file="../footer.jsp"%>
+	<%
+	}
+	%>
+	
+	
 </body>
 </html>
