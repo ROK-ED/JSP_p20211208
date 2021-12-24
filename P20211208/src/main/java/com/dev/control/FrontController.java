@@ -13,12 +13,15 @@ import javax.servlet.http.HttpServletResponse;
 
 public class FrontController extends HttpServlet {
 	
-	HashMap<String, Controller> list = null;
+//	HashMap<String, Controller> list = null;
+	
+	//이방법으로 선언하는게 좋음
+	HashMap<String, Controller> list = new HashMap<String, Controller>();
 	
 	@Override
 	public void init(ServletConfig config) throws ServletException {
 		System.out.println("controller init()");
-		list = new HashMap<String, Controller>();
+//		list = new HashMap<String, Controller>();
 		
 		list.put("/memberInsert.do", new MemberInsertContoller());
 		list.put("/memberList.do", new MemberListConroller());
